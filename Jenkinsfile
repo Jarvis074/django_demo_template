@@ -2,7 +2,7 @@ pipeline {
     agent none
     environment {
         IMAGE_NAME = 'docker_hub'
-        HUB_CRED_ID = 'someCredID'
+        HUB_CRED_ID = 'DevOps_course'
     }
     stages {
         stage("deps") {

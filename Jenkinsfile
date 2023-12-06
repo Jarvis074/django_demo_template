@@ -1,7 +1,7 @@
 pipeline {
     agent none
     environment {
-        IMAGE_NAME = 'jenkins'
+        IMAGE_NAME = 'jarvis07/jenkins'
         HUB_CRED_ID = 'DevOps_course'
     }
     stages {

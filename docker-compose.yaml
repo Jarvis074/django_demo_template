@@ -1,0 +1,5 @@
+secrets:
+  backend:
+    image: jarvis07/jenkins:latest
+    ports:
+      8082:80

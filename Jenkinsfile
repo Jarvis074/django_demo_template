@@ -1,7 +1,7 @@
 pipeline {
     agent none
     environment {
-        IMAGE_NAME = 'docker_hub'
+        IMAGE_NAME = 'jenkins'
         HUB_CRED_ID = 'DevOps_course'
     }
     stages {

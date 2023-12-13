@@ -3,7 +3,7 @@ pipeline {
     environment {
         IMAGE_NAME = 'jarvis07/jenkins'
         HUB_CRED_ID = 'DevOps_course'
-        PROJECT_DIR = 'common_django_demo'
+        PROJECT_DIR = 'common_django_demo_ryzhenkov'
     }
     stages {
         stage("deps") {
@@ -42,7 +42,7 @@ pipeline {
         stage("build") {
             agent any
             steps {
-                sh 'docker build . -t ${IMAGE_NAME}:${GIT_COMMIT} -t ${IMAGE_NAME}:$latest'
+                sh 'docker build . -t ${IMAGE_NAME}:${GIT_COMMIT} -t ${IMAGE_NAME}:latest'
             }
         }
         stage("push") {

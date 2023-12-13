@@ -63,7 +63,9 @@ pipeline {
                         string(credentialsId: "production_ip", variable: "SERVER_IP"),
                         sshUserPrivateKey(credentialsId: "production_key", KeyFileVariable: "SERVER_KEY", usernameVariable: "SERVER_USERNAME")
                     ]
-                )
+                ) {
+                    sh 'ssh -i ${SERVER_KEY} ${SERVER_USERNAME}@${SERVER_IP} ls'
+                }
             }
         }
     }

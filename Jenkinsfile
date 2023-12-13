@@ -41,7 +41,7 @@ pipeline {
         stage("build") {
             agent any
             steps {
-                sh 'docker build . -t ${IMAGE_NAME}:${GIT_COMMIT}'
+                sh 'docker build . -t ${IMAGE_NAME}:${GIT_COMMIT} -t ${IMAGE_NAME}:$latest'
             }
         }
         stage("push") {
@@ -51,7 +51,19 @@ pipeline {
                 usernameVariable: 'HUB_USERNAME', passwordVariable: 'HUB_PASSWORD')]) {
                     sh 'docker login -u ${HUB_USERNAME} -p ${HUB_PASSWORD}'
                     sh 'docker push ${IMAGE_NAME}:${GIT_COMMIT}'
+                    sh 'docker push ${IMAGE_NAME}:$latest'
                 }
+            }
+        }
+        stage("deploy") {
+            agent any
+            steps {
+                withCredentials(
+                    [
+                        string(credentialsId: "production_ip", variable: "SERVER_IP"),
+                        sshUserPrivateKey(credentialsId: "production_key", KeyFileVariable: "SERVER_KEY", usernameVariable: "SERVER_USERNAME")
+                    ]
+                )
             }
         }
     }

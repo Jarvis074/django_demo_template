@@ -37,6 +37,9 @@ pipeline {
             }
             steps {
                 sh 'python -m coverage report'
+                sh 'python -m coverage xml'
+                sh 'python -m coverage html'
+                archiveArtifacts 'htmlcov/*'
             }
         }
         stage("build") {

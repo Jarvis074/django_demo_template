@@ -2,4 +2,4 @@ services:
   backend:
     image: jarvis07/jenkins:latest
     ports:
-      - 8089:80
+      - 8096:80

@@ -75,5 +75,19 @@ pipeline {
                 }
             }
         }
+        stage("proxy config") {
+            agent any
+            steps {
+                withCredentials(
+                    [
+                        string(credentialsId: "production_ip", variable: 'SERVER_IP'),
+                        sshUserPrivateKey(credentialsId: "production_key", keyFileVariable: 'SERVER_KEY', usernameVariable: 'SERVER_USERNAME')
+                    ]
+                ) {
+                    sh 'scp -i ${SERVER_KEY} ryzhenkov.prod.mshp-devops.com.conf ${SERVER_USERNAME}@${SERVER_IP}:nginx'
+                    sh 'ssh -i ${SERVER_KEY} ${SERVER_USERNAME}@${SERVER_IP} sudo systemctl reload nginx'
+                }
+            }
+        }
     }
 }

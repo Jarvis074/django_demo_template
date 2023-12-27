@@ -85,6 +85,7 @@ pipeline {
                     ]
                 ) {
                     sh 'scp -i ${SERVER_KEY} ryzhenkov.prod.mshp-devops.com.conf ${SERVER_USERNAME}@${SERVER_IP}:nginx'
+                    sh 'ssh -i ${SERVER_KEY} ${SERVER_USERNAME}@${SERVER_IP} sudo certbot --nginx --non-interactive --agree-tos -m ryzhenkov@devops.ru -d ryzhenkov.prod.mshp-devops.com'
                     sh 'ssh -i ${SERVER_KEY} ${SERVER_USERNAME}@${SERVER_IP} sudo systemctl reload nginx'
                 }
             }

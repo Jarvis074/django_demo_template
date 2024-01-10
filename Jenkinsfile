@@ -59,7 +59,7 @@ pipeline {
                 ) {
                     sh '''docker run \
                         --rm \
-                        -e SONAR_HOST_URL="http://${SONARQUBE_URL}" \
+                        -e SONAR_HOST_URL="${SONARQUBE_URL}" \
                         -e SONAR_SCANNER_OPTS="-Dsonar.projectKey=${PROJECT_KEY}" \
                         -e SONAR_TOKEN="PROJECT_TOKEN" \
                         -v "${WORKSPACE}:/usr/src" \

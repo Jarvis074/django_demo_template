@@ -50,11 +50,11 @@ pipeline {
         }
         stage("sonar scan") {
             agent any
-            steps {
+           steps {
                 withCredentials(
                     [
-                        string(credentialsId: "sonarqube_url", variable: 'SONARQUBE_URL'),
-                        usernamePassword(credentialsId: "sonarqube_token", usernameVariable: 'PROJECT_KEY', passwordVariable: 'PROJECT_TOKEN')
+                        string(credentialsId: "sonarqube_url", variable: "SONARQUBE_URL"),
+                        usernamePassword(credentialsId: "sonarqube_token", usernameVariable: "PROJECT_KEY", passwordVariable: "PROJECT_TOKEN")
                     ]
                 ) {
                     sh '''docker run \
@@ -66,7 +66,7 @@ pipeline {
                         sonarsource/sonar-scanner-cli
                     '''
                 }
-            }
+           }
         }
         stage("push") {
             agent any
